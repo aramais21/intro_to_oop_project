@@ -1,6 +1,5 @@
 import java.util.*;
 
-import javax.print.DocFlavor.STRING;
 public class QuadraticEquation{
 	private double a;
 	private double b;
