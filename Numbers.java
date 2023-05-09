@@ -1,7 +1,14 @@
-public interface Numbers<T> {
+public interface Numbers {
+
     double getValueAsDouble();
-    T add(T other);
-    T subtract(T other);
-    T multiply(T other);
-	T divide(T other);
-}
+    Numbers add(Numbers other);
+    Numbers subtract(Numbers other);
+    Numbers multiply(Numbers other);
+    Numbers divide(Numbers other);
+  
+    Numbers clone();
+  
+    Numbers getMultiplicativeInverse();
+  
+    Numbers getAdditiveInverse();
+  }
