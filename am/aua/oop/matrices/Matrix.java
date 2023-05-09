@@ -3,24 +3,24 @@ package am.aua.oop.matrices;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import am.aua.oop.numbers.Numbers;
+import am.aua.oop.numbers.*;
 
 public class Matrix<T extends Numbers> {
     private ArrayList<ArrayList<T>> matrix;
     private int rowCount;
     private int columnCount;
 
-    public Matrix(int rowCount, int columnCount, ArrayList<ArrayList<T>> base) throws InvalidBase {
+    public Matrix(int rowCount, int columnCount, ArrayList<ArrayList<T>> base) throws InvalidBaseException {
         this.rowCount = rowCount;
         this.columnCount = columnCount;
         this.matrix = new ArrayList<ArrayList<T>>(rowCount);
         if(base.size() != rowCount) {
-            throw new InvalidBase();
+            throw new InvalidBaseException();
         }
         for(int i = 0; i < rowCount; i++) {
             ArrayList<T> row = base.get(i);
             if(row.size() < columnCount) {
-                throw new InvalidBase();
+                throw new InvalidBaseException();
             }
             ArrayList<T> validatedRow = new ArrayList<>(columnCount);
             Collections.copy(row.subList(0,columnCount-1), validatedRow);
@@ -55,13 +55,12 @@ public class Matrix<T extends Numbers> {
 
 
     private T createACompatibleScaleBasedOnTheNumber(T number, double scale) {
-//        Todo uncomment this after numbers are merged
-//        if(number instanceof SimpleNumber) {
-//            return new SimpleNumber(scale);
-//        } else if (number instanceof ModularNumber) {
-//            return new ModularNumber(scale);
-//        }
-//        return ComplexNumber(scale);
+        if(number instanceof SimpleNumber) {
+            return (T) new SimpleNumber(scale);
+        } else if (number instanceof ModularNumber) {
+            return (T) new ModularNumber(scale, ((ModularNumber) number).getBase());
+        }
+        return (T) new ComplexNumber(scale);
     }
 
     public void multiplyRowBy(int rowIndex, double scale) {
