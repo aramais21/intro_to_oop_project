@@ -1,6 +1,6 @@
 package am.aua.oop.solvers;
 
-public class QuadraticEquationSolver {
+public class QuadraticEquationSolver implements Solver {
     private final double a;
     private final double b;
     private final double c;
@@ -15,7 +15,7 @@ public class QuadraticEquationSolver {
         return b * b - 4 * a * c;
     }
 
-    public String Roots() {
+    public String getSolutionAsString() {
         double Discriminant = getDiscriminant();
 
         if (Discriminant < 0)

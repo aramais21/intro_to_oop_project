@@ -22,9 +22,9 @@ public class Matrix<T extends Numbers> {
             if (row.size() < columnCount) {
                 throw new InvalidBaseException();
             }
-            ArrayList<T> validatedRow = new ArrayList<T>(columnCount);
-            Collections.copy(row.subList(0, columnCount - 1), validatedRow);
-            matrix.set(i, validatedRow);
+//            ArrayList<T> validatedRow = new ArrayList<T>(columnCount);
+//            Collections.copy(row.subList(0, columnCount - 1), validatedRow);
+            matrix.add(row);
         }
     }
 
@@ -41,6 +41,14 @@ public class Matrix<T extends Numbers> {
             }
             matrix.set(i, row);
         }
+    }
+
+    public T getCoefficiant(int rowIndex, int columnIndex) {
+        return this.matrix.get(rowIndex).get(columnIndex);
+    }
+
+    public int getColumnCount() {
+        return this.columnCount;
     }
 
     public void swapRows(int firstRowIndex, int secondRowIndex) {
@@ -105,7 +113,7 @@ public class Matrix<T extends Numbers> {
         for (int i = 0; i < this.rowCount; i++) {
             int[] nonZeroEntry = firsNonZeroEntriesInRows[i];
             int rowIndex = nonZeroEntry[1];
-            newMatrix.set(i, this.matrix.get(rowIndex));
+            newMatrix.add(this.matrix.get(rowIndex));
         }
         this.matrix = newMatrix;
         for (int rowIndex = 0; rowIndex < rowCount; rowIndex++) {
@@ -204,7 +212,14 @@ public class Matrix<T extends Numbers> {
         }
     }
 
-    private T getCoefficiant(int rowIndex, int columnIndex) {
-        return this.matrix.get(rowIndex).get(columnIndex);
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for(ArrayList<T> row : this.matrix){
+            for (T coeficiant : row) {
+                builder.append(coeficiant.toString() + " ");
+            }
+            builder.append("\n");
+        }
+        return builder.toString();
     }
 }

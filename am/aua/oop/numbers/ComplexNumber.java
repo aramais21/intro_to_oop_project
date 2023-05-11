@@ -87,4 +87,8 @@ public class ComplexNumber implements Numbers, Cloneable {
         }
         return (ComplexNumber) num;
     }
+
+    public String toString() {
+        return this.real + " " + this.imaginary + "i";
+    }
 }

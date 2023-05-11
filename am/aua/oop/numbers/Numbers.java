@@ -16,4 +16,6 @@ public interface Numbers {
     Numbers getAdditiveInverse();
 
     boolean isNonZero();
+
+    String toString();
 }
