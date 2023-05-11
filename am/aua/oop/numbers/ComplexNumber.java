@@ -61,19 +61,24 @@ public class ComplexNumber implements Numbers, Cloneable {
         }
     }
 
-//  TODO Implement this
     public Numbers clone() {
-        return null;
+        return new ComplexNumber(this.real, this.imaginary);
     }
 
-//  TODO Implement this
-    public Number getMultiplicativeInverse() {
-        return null;
+    public Numbers getMultiplicativeInverse() throws ArithmeticException {
+        double divisor = (real * real) + (imaginary * imaginary);
+        if (divisor == 0) {
+            throw new ArithmeticException("Inverse does not exist");
+        }
+        double inverseReal = real / divisor;
+        double inverseImaginary = -imaginary / divisor;
+        return new ComplexNumber(inverseReal, inverseImaginary);
     }
 
-//  TODO Implement this
-    public Number getAdditiveInverse() {
-        return null;
+    public Numbers getAdditiveInverse() {
+        double inverseReal = -real;
+        double inverseImaginary = -imaginary;
+        return new ComplexNumber(inverseReal, inverseImaginary);
     }
 
 //    TODO check if this is needed
