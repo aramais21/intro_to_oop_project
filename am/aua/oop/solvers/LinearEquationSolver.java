@@ -13,33 +13,31 @@ public class LinearEquationSolver<T extends Numbers> implements Solver {
         this.coeefficiantMatrix = coeefficiantMatrix;
     }
 
-    public String getSolutionAsString() {
+    public Solution getSolution() {
         try {
-            this.coeefficiantMatrix.transformToRowEchelonForm();
             this.coeefficiantMatrix.transformToReducedRowEchelonForm();
             int columnCount = this.coeefficiantMatrix.getColumnCount();
             ArrayList<Integer> pivotColumnIndexes = this.coeefficiantMatrix.getPivotColumnIndexes();
-            System.out.println(pivotColumnIndexes);
-            System.out.println(this.coeefficiantMatrix.toString());
-            if (pivotColumnIndexes.get(pivotColumnIndexes.size()-1) == columnCount - 1) {
-                return "This Linear System is inconsistent";
+            if (pivotColumnIndexes.size() > 0 && pivotColumnIndexes.get(pivotColumnIndexes.size()-1) == columnCount - 1) {
+                System.out.println("This Linear System is inconsistent");
+                return null;
             }
             ArrayList<Integer> freeColumnIndexes = this.coeefficiantMatrix.getFreeColumnIndexes();
             if(freeColumnIndexes.size() > 0) {
 //                TODO implement so that the solution is shown as a formula
-                return "This system has infinitely many solutions";
+                System.out.println("This system has infinitely many solutions");
+                return null;
             }
-            StringBuilder sol = new StringBuilder("The solution is { ");
+            ArrayList<ArrayList<T>> vectors = new ArrayList<>();
+            ArrayList<T> vector = new ArrayList<>();
             for (int i = 0; i < pivotColumnIndexes.size(); i++) {
-                sol.append(this.coeefficiantMatrix.getCoefficiant(i, columnCount - 1));
-                if (i != pivotColumnIndexes.size() -1) {
-                    sol.append(", ");
-                }
+                vector.add(this.coeefficiantMatrix.getCoefficiant(i, columnCount - 1));
             }
-            sol.append("  }");
-            return sol.toString();
+            vectors.add(vector);
+            return new VectorSolution<T>(vectors);
         } catch (InvalidFormException err) {
-            return "Oops, Matrix could not have been solved";
+            System.out.println("Oops, Matrix could not have been solved");
+            return null;
         }
     }
 }

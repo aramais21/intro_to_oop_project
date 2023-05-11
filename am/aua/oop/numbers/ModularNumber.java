@@ -5,7 +5,6 @@ public class ModularNumber implements Numbers {
     private double base;
 
     public ModularNumber(double value, double base) {
-//   TODO check Case when value is -1
         this.value = value % base;
         this.base = base;
     }

@@ -1,7 +1,6 @@
 package am.aua.oop.matrices;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import am.aua.oop.numbers.*;
 
@@ -173,7 +172,7 @@ public class Matrix<T extends Numbers> {
     public ArrayList<Integer> getFreeColumnIndexes() throws InvalidFormException {
         ArrayList<Integer> pivotIndexes = this.getPivotColumnIndexes();
         ArrayList<Integer> allIndexes = new ArrayList<>();
-        for (int i = 0; i <= this.rowCount; i++) {
+        for (int i = 0; i < this.rowCount; i++) {
             allIndexes.add(i);
         }
         for (Integer pivotIndex : pivotIndexes) {
@@ -187,7 +186,7 @@ public class Matrix<T extends Numbers> {
     }
 
     private int getFirstNonZeroEntryIndex(int rowIndex) {
-        if (!isRowIndexInvalid(rowIndex)) {
+        if (isRowIndexInvalid(rowIndex)) {
             return -1;
         }
         ArrayList<T> row = this.matrix.get(rowIndex);

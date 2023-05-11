@@ -16,7 +16,7 @@ public class LinearEquationTester {
     public static void main(String[] args) {
         Scanner scanner = null;
         try {
-            scanner = new Scanner(new BufferedReader(new FileReader("./data.txt")));
+            scanner = new Scanner(new BufferedReader(new FileReader("dataExamples/simple.txt")));
             String numberType = scanner.nextLine();
             int rowCount = scanner.nextInt();
             int columnCount = scanner.nextInt();
@@ -30,30 +30,30 @@ public class LinearEquationTester {
                     }
                     simpleMatrix.add(row);
                 }
-                matrix = new Matrix<SimpleNumber>(rowCount, columnCount, simpleMatrix);
+                matrix = new Matrix<>(rowCount, columnCount, simpleMatrix);
             } else if (numberType.equals(NumbersEnum.MODULAR.getType())) {
                 int base = scanner.nextInt();
                 ArrayList<ArrayList<ModularNumber>> simpleMatrix = new ArrayList<>(rowCount);
                 for (int i = 0; i < rowCount; i++) {
                     ArrayList<ModularNumber> row = new ArrayList<>(columnCount);
                     for(int j = 0; j < columnCount; j++) {
-                        row.set(j, new ModularNumber(scanner.nextDouble(), base));
+                        row.add(new ModularNumber(scanner.nextDouble(), base));
                     }
-                    simpleMatrix.set(i, row);
+                    simpleMatrix.add(row);
                 }
-                matrix = new Matrix<ModularNumber>(rowCount, columnCount, simpleMatrix);
+                matrix = new Matrix<>(rowCount, columnCount, simpleMatrix);
             } else if (numberType.equals(NumbersEnum.COMPLEX.getType())) {
                 ArrayList<ArrayList<ComplexNumber>> simpleMatrix = new ArrayList<>(rowCount);
                 for (int i = 0; i < rowCount; i++) {
                     ArrayList<ComplexNumber> row = new ArrayList<>(columnCount);
                     for(int j = 0; j < columnCount; j++) {
-                        row.set(j, new ComplexNumber(scanner.nextDouble(), scanner.nextDouble()));
+                        row.add(new ComplexNumber(scanner.nextDouble(), scanner.nextDouble()));
                     }
-                    simpleMatrix.set(i, row);
+                    simpleMatrix.add(row);
                 }
                 matrix = new Matrix<ComplexNumber>(rowCount, columnCount, simpleMatrix);
             }
-            System.out.println(new LinearEquationSolver(matrix).getSolutionAsString());
+            System.out.println(new LinearEquationSolver(matrix).getSolution());
         } catch (IOException err) {
             err.printStackTrace();
         } catch (InvalidBaseException e) {

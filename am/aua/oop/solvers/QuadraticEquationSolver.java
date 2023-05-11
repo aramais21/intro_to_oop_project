@@ -15,15 +15,14 @@ public class QuadraticEquationSolver implements Solver {
         return b * b - 4 * a * c;
     }
 
-    public String getSolutionAsString() {
+    public Solution getSolution() {
         double Discriminant = getDiscriminant();
 
         if (Discriminant < 0)
-            return ("Negative Discriminant");
+            return null;
         else if (Discriminant == 0)
-            return "Root: " + (-b / 2 * a);
+            return new ScalarSolution(new double[]{(-b / 2 * a)});
         else
-            return "Root1: " + ((-b + Math.sqrt(getDiscriminant())) / 2 * a) + " " +
-                    "Root2: " + ((-b - Math.sqrt(getDiscriminant())) / 2 * a);
+            return new ScalarSolution(new double[]{((-b + Math.sqrt(getDiscriminant())) / 2 * a), ((-b - Math.sqrt(getDiscriminant())) / 2 * a) });
     }
 }
