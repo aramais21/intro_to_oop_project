@@ -47,22 +47,21 @@ public class SimpleNumber implements Numbers, Cloneable {
         }
     }
 
-    //  TODO Implement this
-    public Numbers clone() {
-        return null;
+    public SimpleNumber clone() {
+        return new SimpleNumber(this.value);
     }
 
-    //  TODO Implement this
-    public Number getMultiplicativeInverse() {
-        return null;
+    public SimpleNumber getMultiplicativeInverse() throws ArithmeticException {
+        if (value == 0.0) {
+            throw new ArithmeticException("Cannot calculate multiplicative inverse of zero");
+        }
+        return new SimpleNumber(1.0 / value);
+    }
+    public SimpleNumber getAdditiveInverse() {
+        return new SimpleNumber(-1 * value);
     }
 
-    //  TODO Implement this
-    public Number getAdditiveInverse() {
-        return null;
-    }
-
-//    TODO check if this is needed
+    //    TODO check if this is needed
 //    public Numbers divide(Numbers other){
 //        SimpleNumber newValue = new SimpleNumber(this.value/other.value);
 //        return newValue;

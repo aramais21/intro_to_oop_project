@@ -13,7 +13,7 @@ public interface Numbers {
 
     Numbers clone();
 
-    Number getMultiplicativeInverse();
+    Numbers getMultiplicativeInverse() throws ArithmeticException;
 
-    Number getAdditiveInverse();
+    Numbers getAdditiveInverse();
 }

@@ -5,6 +5,7 @@ public class ModularNumber implements Numbers {
     private double base;
     
     public ModularNumber(double value, double base) {
+//        Case when value is -1
         this.value = value % base;
         this.base = base;
     }
@@ -65,19 +66,26 @@ public class ModularNumber implements Numbers {
         }
     }
 
-    //  TODO Implement this
     public Numbers clone() {
-        return null;
+        return new ModularNumber(this.value, this.base);
+    }
+    public Numbers getMultiplicativeInverse() throws ArithmeticException {
+        if(this.value <= 0 || !NumbersUtil.isPrime(this.base) || !NumbersUtil.areCoPrime(this.value, this.base)) {
+            throw new ArithmeticException("Nonexistent inverse");
+        }
+        double a = this.value % this.base;
+        for (double possibleInverse = 1; possibleInverse < this.base; possibleInverse++) {
+            if ((a * possibleInverse) % this.base == 1) {
+                return new ModularNumber(possibleInverse, this.base);
+            }
+        }
+
+        throw new ArithmeticException("Nonexistent inverse");
     }
 
-    //  TODO Implement this
-    public Number getMultiplicativeInverse() {
-        return null;
-    }
-
-    //  TODO Implement this
-    public Number getAdditiveInverse() {
-        return null;
+    public Numbers getAdditiveInverse() {
+        double additiveInverse = (base - value) % base;
+        return new ModularNumber(additiveInverse, base);
     }
 
 //	public ModularNumber divide(ModularNumber other){
