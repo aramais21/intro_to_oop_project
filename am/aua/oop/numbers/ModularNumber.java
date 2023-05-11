@@ -99,4 +99,8 @@ public class ModularNumber implements Numbers {
         }
         return (ModularNumber) num;
     }
+
+    public String toString() {
+        return this.value + "m" + this.base;
+    }
 }

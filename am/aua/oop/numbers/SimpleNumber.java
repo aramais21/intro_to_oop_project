@@ -72,4 +72,8 @@ public class SimpleNumber implements Numbers, Cloneable {
         }
         return (SimpleNumber) num;
     }
+
+    public String toString() {
+        return "" + this.value;
+    }
 }
