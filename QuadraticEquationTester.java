@@ -11,7 +11,7 @@ public class QuadraticEquationTester {
     double c = sc.nextDouble();
 
     QuadraticEquationSolver quadraticEquation = new QuadraticEquationSolver(a, b, c);
-    System.out.println(quadraticEquation.getSolutionAsString());
+    System.out.println(quadraticEquation.getSolution());
   }
 
 }
