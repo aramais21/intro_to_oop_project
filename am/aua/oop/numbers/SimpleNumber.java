@@ -23,7 +23,7 @@ public class SimpleNumber implements Numbers, Cloneable {
         }
     }
 
-    public Numbers subtract(Numbers other){
+    public Numbers subtract(Numbers other) {
         try {
             SimpleNumber otherAsSimple = this.covertNumberToSimpleNumber(other);
             SimpleNumber newValue = new SimpleNumber(this.value - otherAsSimple.value);
@@ -57,18 +57,17 @@ public class SimpleNumber implements Numbers, Cloneable {
         }
         return new SimpleNumber(1.0 / value);
     }
+
     public SimpleNumber getAdditiveInverse() {
         return new SimpleNumber(-1 * value);
     }
 
-    //    TODO check if this is needed
-//    public Numbers divide(Numbers other){
-//        SimpleNumber newValue = new SimpleNumber(this.value/other.value);
-//        return newValue;
-//    }
+    public boolean isNonZero() {
+        return this.value != 0;
+    }
 
     private SimpleNumber covertNumberToSimpleNumber(Numbers num) throws InvalidNumberTypeException {
-        if(!(num instanceof SimpleNumber)) {
+        if (!(num instanceof SimpleNumber)) {
             throw new InvalidNumberTypeException();
         }
         return (SimpleNumber) num;

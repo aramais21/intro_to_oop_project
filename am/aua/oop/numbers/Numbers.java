@@ -9,11 +9,11 @@ public interface Numbers {
 
     Numbers multiply(Numbers other);
 
-//    Numbers divide(Numbers other);
-
     Numbers clone();
 
     Numbers getMultiplicativeInverse() throws ArithmeticException;
 
     Numbers getAdditiveInverse();
+
+    boolean isNonZero();
 }
