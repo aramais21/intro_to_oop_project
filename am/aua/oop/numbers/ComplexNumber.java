@@ -1,27 +1,22 @@
 package am.aua.oop.numbers;
 
 public class ComplexNumber implements Numbers, Cloneable {
-	private double real;
-	private double imaginary;
+    private double real;
+    private double imaginary;
 
-	public ComplexNumber(double real, double imaginary) {
+    public ComplexNumber(double real, double imaginary) {
         this.real = real;
         this.imaginary = imaginary;
     }
 
-    public ComplexNumber(double real) {
-        this.real = real;
-        this.imaginary = 0;
-    }
-    
     public double getValueAsDouble() {
         return this.real;
     }
-    
+
     public double getImaginary() {
         return this.imaginary;
     }
-    
+
     public Numbers add(Numbers other) {
         try {
             ComplexNumber otherAsComplex = this.covertNumberToComplexNumber(other);
@@ -34,8 +29,8 @@ public class ComplexNumber implements Numbers, Cloneable {
             return other;
         }
     }
-    
-    public Numbers subtract(Numbers other){
+
+    public Numbers subtract(Numbers other) {
         try {
             ComplexNumber otherAsComplex = this.covertNumberToComplexNumber(other);
             double newReal = this.real - otherAsComplex.real;
@@ -47,7 +42,7 @@ public class ComplexNumber implements Numbers, Cloneable {
             return other;
         }
     }
-    
+
     public Numbers multiply(Numbers other) {
         try {
             ComplexNumber otherAsComplex = this.covertNumberToComplexNumber(other);
@@ -81,17 +76,13 @@ public class ComplexNumber implements Numbers, Cloneable {
         return new ComplexNumber(inverseReal, inverseImaginary);
     }
 
-//    TODO check if this is needed
-//	public Numbers divide(Numbers other) {
-//
-//        double newReal = this.real * other.real - this.imaginary * other.imaginary;
-//        double newImaginary = this.real * other.imaginary + this.imaginary * other.real;
-//        return new ComplexNumber(newReal, newImaginary);
-//    }
+    public boolean isNonZero() {
+        return real != 0 && imaginary != 0;
+    }
 
     private ComplexNumber covertNumberToComplexNumber(Numbers num) throws InvalidNumberTypeException {
 //        TODO we can later implement this so that it does not throw an error but rather creates a new complex number based on the num passed. for simple and modular numbers as well
-        if(!(num instanceof ComplexNumber)) {
+        if (!(num instanceof ComplexNumber)) {
             throw new InvalidNumberTypeException();
         }
         return (ComplexNumber) num;
